@@ -5,7 +5,6 @@
 #include <QStackedWidget>
 #include <QWidget>
 #include <QMouseEvent>
-#include <QPoint>
 
 #include "components/dashboard.h"
 #include "components/menu.h"
@@ -28,6 +27,7 @@ private slots:
 
 private:
     void setupUI();
+    void slideToIndex(int newIndex);
 
     Dashboard* dashboard;
     Menu* menu;
@@ -36,9 +36,10 @@ private:
     QStackedWidget* centralWidget;
     QWidget* topBar;
 
-    QPoint dragStartPosition;
-    bool dragging;
-    int swipeThreshold; // 滑动阈值
+    int startPosX;
+    int endPosX;
+    bool dragging = false;
+    int swipeThreshold;
 
 };
 #endif // MAINWINDOW_H
