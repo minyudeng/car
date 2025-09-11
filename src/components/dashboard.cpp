@@ -23,17 +23,17 @@ Dashboard::Dashboard(QWidget *parent) : QWidget(parent)
     secondaryColor = QColor(240, 240, 240); // Light gray
     alertColor = QColor(255, 80, 80);       // Red for alerts
 
-    QFile styleFile(":/styles/dashboard.css");
+    QFile styleFile(":/styles/dashboard.qss");
     if (styleFile.open(QFile::ReadOnly | QFile::Text))
     {
         QString style = styleFile.readAll();
         this->setStyleSheet(style);
-        qDebug() << "样式表dashboard.css加载成功！";
+        qDebug() << "样式表dashboard加载成功！";
         styleFile.close();
     }
     else
     {
-        qDebug() << "无法打开dashboard.css文件:" << styleFile.errorString();
+        qDebug() << "无法打开dashboard文件:" << styleFile.errorString();
     }
 
     setupUI();
@@ -117,22 +117,22 @@ void Dashboard::changeDriveMode()
     if (driveMode == "NORMAL")
     {
         driveMode = "ECO";
-        primaryColor = QColor(0, 200, 0); // Green for eco mode
     }
     else if (driveMode == "ECO")
     {
         driveMode = "SPORT";
-        primaryColor = QColor(255, 80, 80); // Red for sport mode
     }
     else
     {
         driveMode = "NORMAL";
-        primaryColor = QColor(0, 150, 255); // Blue for normal mode
     }
 
     driveModeLabel->setText(driveMode);
-    driveModeLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: " + primaryColor.name() + ";");
     driveModeButton->setText("MODE: " + driveMode);
+
+    driveModeLabel->setProperty("driveMode", driveMode.toUpper());
+    driveModeLabel->style()->unpolish(driveModeLabel);
+    driveModeLabel->style()->polish(driveModeLabel);
 
     // Update range based on mode
     if (driveMode == "ECO")
@@ -167,8 +167,9 @@ void Dashboard::setupUI()
     timeLabel->setAlignment(Qt::AlignLeft);
 
     driveModeLabel = new QLabel(driveMode);
+    driveModeLabel->setObjectName("driveModeLabel");
+    driveModeLabel->setProperty("driveMode", driveMode.toUpper());
     driveModeLabel->setAlignment(Qt::AlignCenter);
-    driveModeLabel->setStyleSheet("font-weight: bold; color: " + primaryColor.name() + ";");
 
     tempLabel = new QLabel(QString::number(outsideTemp) + "°C");
     tempLabel->setAlignment(Qt::AlignRight);
@@ -190,7 +191,6 @@ void Dashboard::setupUI()
 
     batteryPercentageLabel = new QLabel(QString::number(batteryLevel * 100, 'f', 0) + "%");
     batteryPercentageLabel->setAlignment(Qt::AlignCenter);
-    batteryPercentageLabel->setStyleSheet("font-size: 24px; font-weight: bold;");
 
     batteryBar = new QProgressBar();
     batteryBar->setRange(0, 100);
@@ -265,6 +265,7 @@ void Dashboard::setupUI()
 
     powerButton = new QPushButton(isPoweredOn ? "POWER ON" : "POWER OFF");
     powerButton->setObjectName("powerButton");
+    powerButton->setProperty("powerState", isPoweredOn ? "on" : "off");
 
     connect(powerButton, &QPushButton::clicked, this, &Dashboard::togglePower);
 

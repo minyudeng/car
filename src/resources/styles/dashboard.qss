@@ -1,0 +1,59 @@
+/* 顶部信息栏标签样式 */
+QLabel {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* 电源按钮样式 */
+#powerButton {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    min-width: 120px;
+    min-height: 40px;
+    cursor: pointer;
+}
+
+#powerButton[powerState="on"] {
+    background-color: #0096ff;
+}
+
+#powerButton[powerState="off"] {
+    background-color: #444;
+}
+
+#powerButton:pressed {
+    background-color: #0080ff;
+}
+
+/* 驾驶模式标签特殊样式 */
+#driveModeLabel {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#driveModeLabel[driveMode="NORMAL"] {
+    color: rgb(0, 150, 255);
+}
+
+#driveModeLabel[driveMode="SPORT"] {
+    color: rgb(255, 80, 80);
+}
+
+#driveModeLabel[driveMode="ECO"] {
+    color: rgb(0, 200, 0);
+}
+
+/* QProgressBar {
+    border: 2px solid #444;
+    border-radius: 10px;
+    background: #222;
+} */
+
+/* QProgressBar::chunk {
+    height: 20px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgb(0, 150, 255), stop:1 #00ffaa);
+    border-radius: 8px;
+} */
