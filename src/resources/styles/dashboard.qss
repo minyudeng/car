@@ -12,7 +12,6 @@ QLabel {
     font-weight: bold;
     min-width: 120px;
     min-height: 40px;
-    cursor: pointer;
 }
 
 #powerButton[powerState="on"] {
@@ -31,7 +30,6 @@ QLabel {
 #driveModeLabel {
     font-size: 24px;
     font-weight: bold;
-    cursor: pointer;
 }
 
 #driveModeLabel[driveMode="NORMAL"] {

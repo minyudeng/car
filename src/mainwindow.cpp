@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("Car System");
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect screenGeometry = screen->geometry();
-    // setMinimumSize(screenGeometry.width() * 0.8, screenGeometry.height() * 0.8);
+    this->setObjectName("mainWindow");
+    setStyleSheet("#mainWindow { border-image: url(:/images/th.jpg); }");
 
     setupUI();
 }

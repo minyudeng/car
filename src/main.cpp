@@ -20,17 +20,17 @@ int main(int argc, char *argv[])
         }
     }
 
-    QFile styleFile(":/styles/style.css");
+    QFile styleFile(":/styles/style.qss");
 
     
     if (styleFile.open(QFile::ReadOnly | QFile::Text))
     {
        QString style = styleFile.readAll();
         a.setStyleSheet(style);
-        qDebug() << "样式表style.css加载成功！";
+        qDebug() << "样式表style加载成功！";
         styleFile.close();
     }else {
-        qDebug() << "无法打开style.css文件:" << styleFile.errorString();
+        qDebug() << "无法打开style文件:" << styleFile.errorString();
         qDebug() << "使用默认样式";
     }
     

@@ -1,7 +1,8 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource prefix="/">
-    <file>styles/style.css</file>
+    <file>styles/style.qss</file>
     <file>styles/dashboard.qss</file>
+    <file>images/th.jpg</file>
   </qresource>
 </RCC>

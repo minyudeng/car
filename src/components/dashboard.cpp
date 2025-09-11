@@ -28,7 +28,7 @@ Dashboard::Dashboard(QWidget *parent) : QWidget(parent)
     {
         QString style = styleFile.readAll();
         this->setStyleSheet(style);
-        qDebug() << "样式表dashboard加载成功！";
+        qDebug() << "样式表dashboard加载成功!";
         styleFile.close();
     }
     else
@@ -181,7 +181,7 @@ void Dashboard::setupUI()
     // Center dashboard
     QHBoxLayout *centerLayout = new QHBoxLayout();
 
-    // Left panel - Battery info
+    // Left panel
     QVBoxLayout *leftLayout = new QVBoxLayout();
     leftLayout->setAlignment(Qt::AlignCenter);
 
@@ -196,12 +196,12 @@ void Dashboard::setupUI()
     batteryBar->setRange(0, 100);
     batteryBar->setValue(batteryLevel * 100);
     batteryBar->setTextVisible(false);
-    batteryBar->setFixedHeight(20);
     batteryBar->setStyleSheet(
         "QProgressBar {"
         "  border: 2px solid #444;"
         "  border-radius: 10px;"
         "  background: #222;"
+        "  height: 20px;"
         "}"
         "QProgressBar::chunk {"
         "  background: qlineargradient(x1:0, y1:0, x2:1, y2:0,"
