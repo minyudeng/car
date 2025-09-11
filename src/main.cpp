@@ -27,10 +27,10 @@ int main(int argc, char *argv[])
     {
        QString style = styleFile.readAll();
         a.setStyleSheet(style);
-        qDebug() << "样式表加载成功！";
+        qDebug() << "样式表style.css加载成功！";
         styleFile.close();
     }else {
-        qDebug() << "无法打开样式表文件:" << styleFile.errorString();
+        qDebug() << "无法打开style.css文件:" << styleFile.errorString();
         qDebug() << "使用默认样式";
     }
     

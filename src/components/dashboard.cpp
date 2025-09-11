@@ -6,6 +6,7 @@
 #include <QTime>
 #include <QRandomGenerator>
 #include <QFile>
+#include <QStyle>
 
 Dashboard::Dashboard(QWidget *parent) : QWidget(parent)
 {
@@ -27,6 +28,7 @@ Dashboard::Dashboard(QWidget *parent) : QWidget(parent)
     {
         QString style = styleFile.readAll();
         this->setStyleSheet(style);
+        qDebug() << "样式表dashboard.css加载成功！";
         styleFile.close();
     }
     else
@@ -97,18 +99,11 @@ void Dashboard::togglePower()
 {
     isPoweredOn = !isPoweredOn;
     powerButton->setText(isPoweredOn ? "POWER ON" : "POWER OFF");
-    powerButton->setStyleSheet(
-        "QPushButton {"
-        "  background-color: " +
-        (isPoweredOn ? primaryColor.name() : "#444") + ";"
-                                                       "  color: white;"
-                                                       "  border: none;"
-                                                       "  border-radius: 5px;"
-                                                       "  font-weight: bold;"
-                                                       "}"
-                                                       "QPushButton:pressed {"
-                                                       "  background-color: #0080ff;"
-                                                       "}");
+    powerButton->setProperty("powerState", isPoweredOn ? "on" : "off");
+    
+    powerButton->style()->unpolish(powerButton); 
+    powerButton->style()->polish(powerButton);   
+    powerButton->update(); // 触发重绘
 
     if (!isPoweredOn)
     {
@@ -158,7 +153,7 @@ void Dashboard::changeDriveMode()
 void Dashboard::setupUI()
 {
     setFixedSize(800, 480);
-    setStyleSheet("background-color: black; color: white;");
+
 
     // Main layout
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
@@ -170,15 +165,13 @@ void Dashboard::setupUI()
 
     timeLabel = new QLabel("10:30 AM");
     timeLabel->setAlignment(Qt::AlignLeft);
-    timeLabel->setStyleSheet("font-size: 16px;");
 
     driveModeLabel = new QLabel(driveMode);
     driveModeLabel->setAlignment(Qt::AlignCenter);
-    driveModeLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: " + primaryColor.name() + ";");
+    driveModeLabel->setStyleSheet("font-weight: bold; color: " + primaryColor.name() + ";");
 
     tempLabel = new QLabel(QString::number(outsideTemp) + "°C");
     tempLabel->setAlignment(Qt::AlignRight);
-    tempLabel->setStyleSheet("font-size: 16px;");
 
     topLayout->addWidget(timeLabel);
     topLayout->addWidget(driveModeLabel);
@@ -271,19 +264,8 @@ void Dashboard::setupUI()
     bottomLayout->setAlignment(Qt::AlignCenter);
 
     powerButton = new QPushButton(isPoweredOn ? "POWER ON" : "POWER OFF");
-    powerButton->setFixedSize(120, 40);
-    powerButton->setStyleSheet(
-        "QPushButton {"
-        "  background-color: " +
-        (isPoweredOn ? primaryColor.name() : "#444") + ";"
-                                                       "  color: white;"
-                                                       "  border: none;"
-                                                       "  border-radius: 5px;"
-                                                       "  font-weight: bold;"
-                                                       "}"
-                                                       "QPushButton:pressed {"
-                                                       "  background-color: #0080ff;"
-                                                       "}");
+    powerButton->setObjectName("powerButton");
+
     connect(powerButton, &QPushButton::clicked, this, &Dashboard::togglePower);
 
     driveModeButton = new QPushButton("MODE: " + driveMode);
