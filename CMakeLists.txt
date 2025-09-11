@@ -19,6 +19,10 @@ qt_add_executable(${PROJECT_NAME}
     src/mainwindow.h
     src/components/dashboard.cpp
     src/components/dashboard.h
+    src/components/menu.cpp
+    src/components/menu.h
+    src/components/setting.cpp
+    src/components/setting.h
     src/resources/resources.qrc
 )
 
