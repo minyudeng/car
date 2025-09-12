@@ -1,0 +1,24 @@
+QPushButton.menuButton {
+    background-color: #2E86C1;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+QPushButton.menuButton:hover {
+    background-color: #2874A6;
+    color: #f3efef;
+}
+
+QPushButton.menuButton:pressed{
+    background-color: rgb(18, 54, 87);
+    color: bisque;
+}
+
+QLabel.menuLabel {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #f3efef;
+    margin: 0;
+    padding: 0;
+}

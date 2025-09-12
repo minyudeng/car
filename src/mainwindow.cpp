@@ -66,9 +66,11 @@ void MainWindow::setupUI() {
     menu = new Menu(this);
     centralWidget->addWidget(menu);
 
+    // 连接Menu的页面切换信号
+    connect(menu, &Menu::pageChangeRequested, this, &MainWindow::slideToIndex);
+
     setting = new Setting(this);
     centralWidget->addWidget(setting);
-
 
     centralWidget->setCurrentWidget(dashboard);
 }

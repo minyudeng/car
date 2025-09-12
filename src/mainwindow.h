@@ -9,7 +9,6 @@
 #include "components/dashboard.h"
 #include "components/menu.h"
 #include "components/setting.h"
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -28,7 +27,6 @@ private slots:
 private:
     void setupUI();
     void slideToIndex(int newIndex);
-
     Dashboard* dashboard;
     Menu* menu;
     Setting* setting;
