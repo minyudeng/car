@@ -7,7 +7,7 @@
 #include <QRandomGenerator>
 #include <QFile>
 #include <QStyle>
-
+// https://www.zhihu.com/question/620185333/answer/1948049489467274651
 Dashboard::Dashboard(QWidget *parent) : QWidget(parent)
 {
     currentSpeed = 0;       // km/h
